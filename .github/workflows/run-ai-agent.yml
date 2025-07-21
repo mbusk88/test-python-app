@@ -1,18 +1,18 @@
 name: Run AI Code Agent
-    2
-    3 on:
-    4   issues:
-    5     types: [labeled]
-    6
-    7 jobs:
-    8   call-agent:
-    9     if: github.event.label.name == 'ai-agent'
-   11     uses: mbusk88/ai-code-agent/.github/workflows/issue-handler.yml@main
-   12     with:
-   13       repo_name: ${{ github.repository }}
-   14       issue_number: ${{ github.event.issue.number }}
-   15       issue_title: ${{ github.event.issue.title }}
-   16       issue_body: ${{ github.event.issue.body }}
-   17     secrets:
-   19       GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-   20       GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+on:
+   issues:
+      types: [labeled]
+
+jobs:
+   call-agent:
+      if: github.event.label.name == 'ai-agent'
+      uses: mbusk88/ai-code-agent/.github/workflows/issue-handler.yml@main
+      with:
+        repo_name: ${{ github.repository }}
+        issue_number: ${{ github.event.issue.number }}
+        issue_title: ${{ github.event.issue.title }}
+        issue_body: ${{ github.event.issue.body }}
+      secrets:
+        GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
